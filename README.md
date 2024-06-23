@@ -9,3 +9,11 @@ The robotic arm can be controlled via the ROS topic.
 ros2 topic pub /joint_trajectory_controller/joint_trajectory trajectory_msgs/msg/JointTrajectory \
   '{joint_names: ["J1", "J2", "J3", "J4", "J5", "J6"], points: [{positions: [0.5,0.5,0.5,0.5,0.5,0.5]}]}' -1
 ```
+
+or via action:
+```
+ros2 action send_goal \
+  /joint_trajectory_controller/follow_joint_trajectory \
+  control_msgs/FollowJointTrajectory \
+  '{trajectory: {joint_names: ["J1", "J2", "J3", "J4", "J5", "J6"], points: [{positions: [0.5,0.5,0.5,0.5,0.5,0]}]}}'
+```
