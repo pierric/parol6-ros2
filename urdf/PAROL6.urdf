@@ -3,17 +3,17 @@
      Commit Version: 1.6.0-4-g7f85cfe  Build Version: 1.6.7995.38578
      For more information, please see http://wiki.ros.org/sw_urdf_exporter -->
 <robot name="PAROL6" xmlns:xacro="http://www.ros.org/wiki/xacro">
-  <xacro:property name="J1_min" value="-3.14" />
-  <xacro:property name="J1_max" value="3.14" />
-  <xacro:property name="J2_min" value="-1.57" />
-  <xacro:property name="J2_max" value="1.57" />
-  <xacro:property name="J3_min" value="-1.57" />
-  <xacro:property name="J3_max" value="1.57" />
-  <xacro:property name="J4_min" value="0" />
+  <xacro:property name="J1_min" value="-3.64" />
+  <xacro:property name="J1_max" value="1.07" />
+  <xacro:property name="J2_min" value="-1" />
+  <xacro:property name="J2_max" value="1.5" />
+  <xacro:property name="J3_min" value="-3" />
+  <xacro:property name="J3_max" value="2.1" />
+  <xacro:property name="J4_min" value="-1" />
   <xacro:property name="J4_max" value="3.14" />
-  <xacro:property name="J5_min" value="-1.57" />
-  <xacro:property name="J5_max" value="1.57" />
-  <xacro:property name="J6_min" value="0" />
+  <xacro:property name="J5_min" value="-2.17" />
+  <xacro:property name="J5_max" value="2.17" />
+  <xacro:property name="J6_min" value="-3.14" />
   <xacro:property name="J6_max" value="3.14" />
 
 
@@ -107,7 +107,7 @@
     type="revolute">
     <origin
       xyz="0 0 0"
-      rpy="0 0 0" />
+      rpy="0 0 -0.436" />
     <parent
       link="base_link" />
     <child
@@ -165,7 +165,7 @@
     type="revolute">
     <origin
       xyz="0.0234207210610375 0 0.1105"
-      rpy="-1.5707963267949 0 0" />
+      rpy="-1.5707963267949 0.2 0" />
     <parent
       link="L1" />
     <child
@@ -223,7 +223,7 @@
     type="revolute">
     <origin
       xyz="0 -0.18 0"
-      rpy="3.1416 0 -1.5708" />
+      rpy="3.1416 0 -3.1" />
     <parent
       link="L2" />
     <child
@@ -339,7 +339,7 @@
     type="revolute">
     <origin
       xyz="0 0 0.17635"
-      rpy="1.5708 0 0" />
+      rpy="1.5708 0 0.045" />
     <parent
       link="L4" />
     <child
@@ -370,7 +370,7 @@
     </inertial>
     <visual>
       <origin
-        xyz="0 0 0"
+        xyz="0 0 -0.039"
         rpy="0 0 0" />
       <geometry>
         <mesh
@@ -384,7 +384,7 @@
     </visual>
     <collision>
       <origin
-        xyz="0 0 0"
+        xyz="0 0 -0.039"
         rpy="0 0 0" />
       <geometry>
         <mesh
@@ -396,7 +396,7 @@
     name="J6"
     type="continuous">
     <origin
-      xyz="0 0 0"
+      xyz="0 0.039 0"
       rpy="-1.5708 0 0" />
     <parent
       link="L5" />

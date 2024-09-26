@@ -23,9 +23,16 @@ def generate_launch_description():
             "rviz_only",
             default_value="true",
             description="Start Rviz2 with Joint State Publisher gui.",
-        )
+        ),
+        #DeclareLaunchArgument(
+        #    "rviz_skip",
+        #    default_value="false",
+        #    description="Don't run Rivz2",
+        #),
     ]
     rviz_only = LaunchConfiguration("rviz_only")
+    rviz_skip = LaunchConfiguration("rviz_skip")
+    # krviz_skip = False
 
     pkg_ros_gz_sim = Path(get_package_share_directory("ros_gz_sim"))
     pkg_parol6 = Path(get_package_share_directory("parol6"))
@@ -77,8 +84,8 @@ def generate_launch_description():
     #     ],
     #     output="screen",
     # )
-    
-    # not possible via Node. It won't discover the /controller_manager 
+
+    # not possible via Node. It won't discover the /controller_manager
     #
     # joint_state_broadcaster = Node(
     #     package="controller_manager",
@@ -91,7 +98,7 @@ def generate_launch_description():
     #     executable="spawner",
     #     arguments=["position_controller", "--controller-manager", "/controller_manager"],
     # )
-    
+
     joint_state_broadcaster = ExecuteProcess(
         cmd=['ros2', 'control', 'load_controller', '--set-state', 'active', 'joint_state_broadcaster'],
         output='screen'
@@ -106,16 +113,18 @@ def generate_launch_description():
         package="joint_state_publisher_gui",
         executable="joint_state_publisher_gui",
         condition=IfCondition(rviz_only),
-    )    
+    )
 
     rviz = Node(
         package="rviz2",
         executable="rviz2",
         arguments=["-d", str(pkg_parol6 / "config" / "joint_states.rviz")],
+        condition=UnlessCondition(rviz_skip),
     )
 
     return LaunchDescription(
         [
+            *declared_arguments,
             GroupAction(
                 [
                     gazebo,
@@ -131,7 +140,7 @@ def generate_launch_description():
                             target_action=spawn_model,
                             on_exit=[joint_controller],
                         )
-                    ),                    
+                    ),
                     # bridge,
                 ],
                 condition=UnlessCondition(rviz_only),
